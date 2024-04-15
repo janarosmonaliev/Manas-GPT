@@ -1,3 +1,8 @@
+# Annotations
+# This code was taken from Andrej Karpathy's "Let's build GPT: from scratch, in code, spelled out." YouTube video.
+# Video Tutorial Link: https://www.youtube.com/watch?v=kCc8FmEb1nY 
+# Andrej Karpathy's website: https://karpathy.ai/
+
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
@@ -8,6 +13,8 @@ block_size = 256 # what is the maximum context length for predictions?
 max_iters = 5000
 eval_interval = 500
 learning_rate = 3e-4
+
+# this model was trained on Macbook Air M2, hence using it's GPU through Torch Nighly
 device = 'mps' if torch.has_mps else 'cpu'
 
 eval_iters = 200
@@ -19,15 +26,15 @@ dataset_path = 'data/manas_text.txt'
 # ------------
 print(f"Running on {device} compute.")
 
-torch.manual_seed(1337)
+torch.manual_seed(312)
 
-# wget https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt
 with open(dataset_path, 'r', encoding='utf-8') as f:
     text = f.read()
 
-# here are all the unique characters that occur in this text
+# all the unique characters that occur in Epic of Manas
 chars = sorted(list(set(text)))
 vocab_size = len(chars)
+
 # create a mapping from characters to integers
 stoi = { ch:i for i,ch in enumerate(chars) }
 itos = { i:ch for i,ch in enumerate(chars) }
@@ -211,7 +218,7 @@ for iter in range(max_iters):
     # every once in a while evaluate the loss on train and val sets
     if iter % eval_interval == 0 or iter == max_iters - 1:
         losses = estimate_loss()
-        print(f"step {iter}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
+        print(f"Step {iter}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
 
     # sample a batch of data
     xb, yb = get_batch('train')
@@ -222,7 +229,9 @@ for iter in range(max_iters):
     loss.backward()
     optimizer.step()
 
-# generate from the model
+# generate from the Manas GPT model
 context = torch.zeros((1, 1), dtype=torch.long, device=device)
 print(decode(m.generate(context, max_new_tokens=500)[0].tolist()))
-open('more.txt', 'w').write(decode(m.generate(context, max_new_tokens=10000)[0].tolist()))
+open('manas_synthetic_text.txt', 'w').write(decode(m.generate(context, max_new_tokens=10000)[0].tolist()))
+
+# This training with 10K iterations took around ~6 hours!
