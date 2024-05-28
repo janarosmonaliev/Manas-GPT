@@ -4,10 +4,24 @@ This is a personal project aimed to build an LLM based on [Epic of Manas (Sayakb
 
 ### Pre-processing
 
-1. To start train
-   Openly available Epic of Manas (Sayakbai Karalaev's version) was downloaded as PDF.
-2. PDF file was converted into TXT using `PyPDF2`
-3. Process of model training was learned from [Let's build GPT: from scratch, in code, spelled out](https://www.youtube.com/watch?v=kCc8FmEb1nY) by Andrej Karpathy, a founding member of Open AI
+We need to prepare our dataset first. There is an openly available Epic of Manas book (Sayakbai Karalaev's version) in PDF format that I was able to find. Before we begin training, we need our dataset to be in text format:
+
+1. `preprocessing.ipynb` is a simple script that converts `epic-of-manas.pdf` into text using `PyPDF2`.
+2. Manual formatting was done to some extent to remove double line issues.
+3. `prepare.py` is a forked text to `.bin` format train-test dataset converter taken from Andrej Karpathy's [nanoGPT](https://github.com/karpathy/nanoGPT) repository. This will be needed for more in-depth training.
+
+### Simple Training
+
+If you don't have a powerful GPU and using a laptop/Macbook like I did in the beginning, you can run `model_training_v1.py` to train Manas-GPT with limited number of hyperparameters (10.7 M). It took about ~5 hours on Macbook Air M2.
+
+```
+python model_training_v1.py
+# outputs 500 tokens to manas_synthetic_text.txt
+```
+
+### In-depth Training
+
+For this task, I used Google Colab Pro+, as it offers more powerful GPUs with background execution. Since Google Colab VMs flush all of its working directory after session timeouts, `colab_runtime` has the files that need to be uploaded to Google Colab file directory for training. Note that you have to connect it to your GDrive for training models to be saved.
 
 ## Training Data
 
