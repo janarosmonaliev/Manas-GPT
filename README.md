@@ -1,6 +1,8 @@
 # Manas-GPT
 
-This is a personal project aimed to build an LLM based on [Epic of Manas (Sayakbai Karalaev's version)](<https://en.wikipedia.org/wiki/Epic_of_Manas#:~:text=The%20Epic%20of%20Manas%20(Kyrgyz,it%20to%20be%20much%20older)>).
+![Manas Stamp](https://upload.wikimedia.org/wikipedia/commons/7/76/Stamp_of_Kyrgyzstan_010.jpg)
+
+This is a personal project aimed to build an LLM based on [Epic of Manas (Sayakbai Karalaev's version)](<https://en.wikipedia.org/wiki/Epic_of_Manas#:~:text=The%20Epic%20of%20Manas%20(Kyrgyz,it%20to%20be%20much%20older)>). This repository is a modified fork of [nano-GPT](https://github.com/karpathy/nanoGPT) by @karpathy.
 
 ### Pre-processing
 
@@ -22,6 +24,22 @@ python model_training_v1.py
 ### In-depth Training
 
 For this task, I used Google Colab Pro+, as it offers more powerful GPUs with background execution. Since Google Colab VMs flush all of its working directory after session timeouts, `colab_runtime` has the files that need to be uploaded to Google Colab file directory for training. Note that you have to connect it to your GDrive for training models to be saved.
+
+The main notebook that needs to be uploaded and ran is `colab_runtime/manas_training_v2.ipynb`
+
+| Model Feature    | Value         |
+| ---------------- | ------------- |
+| Hyperparameters  | 123.59M       |
+| Tokens per epoch | 330,240       |
+| Dataset size     | 263,517 words |
+
+| Training Setup  | Value                    |
+| --------------- | ------------------------ |
+| Graphics Card   | 1x NVIDIA L4 Tensor Core |
+| GPU RAM         | 23,034MiB                |
+| System RAM      | 53GB                     |
+| Training Epochs | 6,000                    |
+| Training Time   | ~22 hours                |
 
 ## Training Data
 
@@ -60,3 +78,9 @@ Here's a sample text from 263517 word long Epic of Manas:
 - Python 3.11.7
 - Torch 2.4.0.dev20240414 (Nightly, supports M1/M2 Mac GPU processing)
 - Conda 24.3.0
+
+# Thanks
+
+- Andrej Karpathy (@karpathy - OpenAI co-founder) for open-sourcing [nano-GPT](https://github.com/karpathy/nanoGPT) and releasing an amazing tutorial [Let's build GPT: from scratch, in code, spelled out](https://www.youtube.com/watch?v=kCc8FmEb1nY) on YouTube!
+- Murat Jumashev (@jumasheff) for meeting up with me in San Francisco, consulting on the project and connecting me with people in AI/DS area.
+- Tilek Mamutov ([LinkedIn](https://www.linkedin.com/in/tilek/)) for connecting me with Murat Jumashev.
