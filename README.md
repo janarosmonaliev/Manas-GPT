@@ -33,6 +33,14 @@ The main notebook that needs to be uploaded and ran is `colab_runtime/manas_trai
 | Tokens per epoch | 330,240       |
 | Dataset size     | 263,517 words |
 
+### Pre-Trained Model
+
+Pre-trained model is available on [archive.org](https://archive.org/details/manas-gpt-v2) and can be downloaded and placed in `model/manas-gpt-v2.pt`. To generate a sample response with prompt in `prompt.txt`, run:
+
+```
+python sample.py
+```
+
 | Training Setup  | Value                    |
 | --------------- | ------------------------ |
 | Graphics Card   | 1x NVIDIA L4 Tensor Core |
